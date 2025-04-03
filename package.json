@@ -13,15 +13,17 @@
     "@formkit/auto-animate": "^0.8.2",
     "@nuxt/ui": "^3.0.2",
     "@nuxtjs/google-fonts": "^3.2.0",
-    "@nuxtjs/tailwindcss": "^6.13.2",
     "@pinia/nuxt": "^0.10.1",
-    "@tailwindcss/postcss": "^4.1.0",
-    "@tailwindcss/vite": "^4.1.0",
+    "flowbite": "^3.1.2",
     "nuxt": "^3.16.2",
     "pinia": "^3.0.1",
-    "tailwindcss": "^4.1.0",
     "typescript": "^5.8.2",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.1"
   }
 }

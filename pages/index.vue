@@ -1,6 +1,15 @@
 <script setup>
     import { onMounted } from 'vue';
-    // Initialize Flowbite components when the page is mounted
+    definePageMeta({
+        layout: 'landing',
+        head: {
+            title: 'Welcome - Evera',
+            meta: [
+                { name: 'description', content: 'Home page description' },
+                { name: 'keywords', content: 'home, vue, nuxt' },
+            ],
+        },
+    })
     onMounted(() => {
     if (typeof window.initFlowbite === 'function') {
         window.initFlowbite();
@@ -10,6 +19,6 @@
 
 <template>
     <div>
-        <h1 class="text-yellow-500"> Hello World </h1>
+        <CommonHeroSection />
     </div>
 </template> 

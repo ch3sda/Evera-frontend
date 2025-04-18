@@ -18,7 +18,7 @@
 </script>
 
 <template>
-    <div>
+    <div class="h-screen w-full flex items-center justify-center">
         <CommonHeroSection />
     </div>
 </template> 

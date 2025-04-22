@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AdminDashboard />
+    <OrganizerDashboard />
   </div>
 </template>
 

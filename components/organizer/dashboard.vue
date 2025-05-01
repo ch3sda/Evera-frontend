@@ -1,23 +1,19 @@
 <template>
     <div class="min-h-screen p-6">
-      <h1 class="text-3xl font-bold text-gray-800 mb-6">Admin Dashboard</h1>
+      <h1 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
       <div>
-        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="p-6 rounded-xl shadow-md bg-white dark:bg-gray-800">
-            <h3 class="text-lg font-semibold text-gray-700 dark:text-white mb-4">Total Users</h3>
-            <p class="text-2xl font-bold text-gray-900 dark:text-white">10,000</p>
+            <h3 class="text-lg font-semibold text-gray-700 dark:text-white mb-4">Pending Purchase</h3>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">57</p>
           </div>
           <div class="p-6 rounded-xl shadow-md bg-white dark:bg-gray-800">
-            <h3 class="text-lg font-semibold text-gray-700 dark:text-white mb-4">Total Organzer</h3>
-            <p class="text-2xl font-bold text-gray-900 dark:text-white">1000</p>
+            <h3 class="text-lg font-semibold text-gray-700 dark:text-white mb-4">Total Attendee</h3>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">57</p>
           </div>
           <div class="p-6 rounded-xl shadow-md bg-white dark:bg-gray-800">
             <h3 class="text-lg font-semibold text-gray-700 dark:text-white mb-4">Total Events</h3>
-            <p class="text-2xl font-bold text-gray-900 dark:text-white">200</p>
-          </div>
-          <div class="p-6 rounded-xl shadow-md bg-white dark:bg-gray-800">
-            <h3 class="text-lg font-semibold text-gray-700 dark:text-white mb-4">Total Report Event</h3>
-            <p class="text-2xl font-bold text-gray-900 dark:text-white">50</p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">3</p>
           </div>
         </div>
       </div>

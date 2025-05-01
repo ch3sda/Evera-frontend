@@ -7,14 +7,13 @@
             </div>
         </div>
 
-        <CommonBottomNavigation/>
+        <CommonBottomNavigation class="sm:hidden"/>
     </div>
 </template>
 
 <script setup>
     import { onMounted } from 'vue';
 
-    // Initialize Flowbite components when the page is mounted
     onMounted(() => {
     if (typeof window.initFlowbite === 'function') {
         window.initFlowbite();

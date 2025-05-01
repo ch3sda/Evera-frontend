@@ -13,7 +13,9 @@
                     <a href="#" class="ms-auto text-sm text-green-700 hover:underline dark:text-yellow-500">Resend Code</a>
                 </div>
             </div>
-            <button type="submit" class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Verify</button>
+            <NuxtLink to="/dashboard">
+                <button type="submit" class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Verify</button>
+            </NuxtLink>
         </form>
     </div>
   </div>

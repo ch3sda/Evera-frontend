@@ -1,11 +1,11 @@
-// stores/user.js
 import { defineStore } from 'pinia'
+import { ref, computed } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
   const user = ref(null)
 
-  const role = computed(() => user.value?.role || null)
   const isAuthenticated = computed(() => !!user.value)
+  const role = computed(() => user.value?.role || null)
 
   function setUser(userData) {
     user.value = userData
@@ -15,5 +15,5 @@ export const useUserStore = defineStore('user', () => {
     user.value = null
   }
 
-  return { user, role, isAuthenticated, setUser, logout }
+  return { user, isAuthenticated, role, setUser, logout }
 })

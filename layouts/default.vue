@@ -13,6 +13,8 @@
 
 <script setup>
     import { onMounted } from 'vue';
+    import { fetchUser } from '@/composables/useAuth'
+    await fetchUser()
 
     onMounted(() => {
     if (typeof window.initFlowbite === 'function') {

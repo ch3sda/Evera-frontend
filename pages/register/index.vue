@@ -1,19 +1,23 @@
 <template>
     <div class="w-full h-screen flex items-center justify-center">
       <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-          <form class="space-y-6" action="#">
+          <form @submit.prevent="handleRegister" class="space-y-6" action="#">
               <h5 class="text-xl font-medium text-gray-900 dark:text-white">Create <span class="text-green-600 dark:text-green-500">Evera</span>'s account</h5>
               <div>
+                  <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full name</label>
+                  <input type="text" v-model="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Lann Chanvanny" required />
+              </div>
+              <div>
                   <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                  <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                  <input type="email" v-model="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@gmail.com" required />
               </div>
               <div>
                   <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                  <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                  <input type="password" v-model="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
               </div>
               <div>
                   <label for="comfirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comfirm password</label>
-                  <input type="comfirm-password" name="comfirm-password" id="comfirm-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                  <input type="password" v-model="confirmPassword" id="confirmPassword" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
               </div>
               <div class="flex items-start">
                   <div class="flex items-start">
@@ -23,9 +27,8 @@
                       <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
                   </div>
               </div>
-              <NuxtLink to="/register/verify">
-                <button type="submit" class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Login to your account</button>
-              </NuxtLink>
+            <button type="submit" class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Login to your account</button>
+              <p v-if="error" class="text-red-500 text-sm">{{ error }}</p>
               <div class="inline-flex items-center justify-center w-full">
                 <hr class="w-64 h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
                 <span class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">or</span>
@@ -53,14 +56,48 @@
       </div>
     </div>
   </template>
-  <script setup>
-      import { onMounted } from 'vue';
-      definePageMeta({
-          layout: 'landing',
-      })
-      onMounted(() => {
-      if (typeof window.initFlowbite === 'function') {
-          window.initFlowbite();
-      }
-  });
-  </script>
+
+  
+<script setup>
+import { ref, onMounted } from 'vue'
+import { registerUser, fetchUser } from '@/composables/useAuth'
+// import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+
+definePageMeta({
+  layout: 'landing',
+})
+
+const router = useRouter()
+const name = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const error = ref('')
+const loading = ref(false)
+
+const handleRegister = async () => {
+  error.value = ''
+  if (password.value !== confirmPassword.value) {
+    error.value = 'Passwords do not match.'
+    return
+  }
+
+    try {
+        loading.value = true
+        await registerUser(name.value, email.value, password.value)
+        await fetchUser() // To fetch and set the user in Pinia (optional, depends on your flow)
+        router.push('/dashboard') // Redirect after success
+    } catch (err) {
+        error.value = err?.data?.message || 'Registration failed'
+    } finally {
+        loading.value = false
+    }
+    }
+
+onMounted(() => {
+  if (typeof window.initFlowbite === 'function') {
+    window.initFlowbite()
+  }
+})
+</script>

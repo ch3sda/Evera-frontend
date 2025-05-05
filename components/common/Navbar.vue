@@ -42,7 +42,7 @@
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
                 </li>
                 <li>
-                  <a  @click="logout" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                  <a  @click="handleLogout" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
                 </li>
               </ul>
             </div>
@@ -128,13 +128,13 @@
 </template>
 
 <script setup>
-import { logoutUser } from '@/composables/useAuth'
 import { useRouter } from 'vue-router'
+import { logoutUser } from '@/composables/useAuth'
 
 const router = useRouter()
 
-async function logout() {
+async function handleLogout() {
   await logoutUser()
-  router.push('/login')
+  router.push('/login')  // Or your landing page
 }
 </script>

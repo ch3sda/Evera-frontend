@@ -67,13 +67,15 @@
     const password = ref('')
     const router = useRouter()
 
+
     async function handleLogin() {
-    try {
-        await loginUser(email.value, password.value)
-        await fetchUser()
-        router.push('/dashboard')
-    } catch (err) {
-        alert('Login failed')
-    }
-    }
+  try {
+    await loginUser(email.value, password.value)
+    await fetchUser()
+    router.push('/dashboard')
+  } catch (error) {
+    alert('Login failed')
+    console.error(error)
+  }
+}
 </script>

@@ -7,11 +7,14 @@ export default defineNuxtConfig({
       include: ['flowbite']
     }
   },
-  css: ['~/assets/css/tailwind.css'],
+  tailwindcss: {
+    configPath: 'tailwind.config.ts'
+  },
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/google-fonts',
     '@nuxt/ui',
-    '@formkit/auto-animate'
+    '@formkit/auto-animate',
+    '@nuxtjs/tailwindcss'
   ]
 })

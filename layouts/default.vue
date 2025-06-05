@@ -8,13 +8,13 @@
 </template>
 
 <script setup>
-    import { onMounted } from 'vue';
+import { onMounted } from 'vue'
+import { useFlowbite } from '~/composables/useFlowbite';
 
-    // Initialize Flowbite components when the page is mounted
-    onMounted(() => {
-    if (typeof window.initFlowbite === 'function') {
-        window.initFlowbite();
-    }
-    });
+  // initialize components based on data attribute selectors
+  onMounted(() => {
+      useFlowbite(() => {
+          initFlowbite();
+      })
+  })
 </script>
-

@@ -10,11 +10,13 @@ export default defineNuxtConfig({
   tailwindcss: {
     configPath: 'tailwind.config.ts'
   },
+  css: ['~/assets/css/input.css'], // you'll have to create this file
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/google-fonts',
     '@nuxt/ui',
     '@formkit/auto-animate',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxt/image'
   ]
 })

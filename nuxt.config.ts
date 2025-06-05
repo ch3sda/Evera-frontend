@@ -2,16 +2,26 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://localhost:8000', // Laravel
+    }
+  },
   vite: {
     optimizeDeps: {
       include: ['flowbite']
     }
   },
-  css: ['~/assets/css/tailwind.css'],
+  tailwindcss: {
+    configPath: 'tailwind.config.ts'
+  },
+  css: ['~/assets/css/input.css'], // you'll have to create this file
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/google-fonts',
     '@nuxt/ui',
-    '@formkit/auto-animate'
+    '@formkit/auto-animate',
+    '@nuxtjs/tailwindcss',
+    '@nuxt/image'
   ]
 })

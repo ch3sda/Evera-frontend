@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen p-6">
-      <h1 class="text-3xl font-bold text-gray-800 mb-6">Admin Dashboard</h1>
+      <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">Admin Dashboard</h1>
       <div>
         <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div class="p-6 rounded-xl shadow-md bg-white dark:bg-gray-800">

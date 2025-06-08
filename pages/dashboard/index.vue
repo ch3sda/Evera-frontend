@@ -1,7 +1,7 @@
 <template>
   <div>
     <OrganizerDashboard />
-     <!-- <AdminDashboard /> -->
+
   </div>
 </template>
 

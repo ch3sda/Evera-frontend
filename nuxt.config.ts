@@ -13,15 +13,28 @@ export default defineNuxtConfig({
     }
   },
   tailwindcss: {
-    configPath: 'tailwind.config.ts'
+    configPath: 'tailwind.config.ts',
+    cssPath: '~/assets/css/input.css',
+    exposeConfig: false,
+    config: {},
+    injectPosition: 0,
+    viewer: true,
   },
-  css: ['~/assets/css/input.css'], // you'll have to create this file
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/google-fonts',
     '@nuxt/ui',
     '@formkit/auto-animate',
     '@nuxtjs/tailwindcss',
-    '@nuxt/image'
-  ]
+    '@nuxt/image',
+    '@nuxtjs/color-mode'
+  ],
+  colorMode: {
+    classSuffix: '',
+    classPrefix: '',
+    preference: 'system',
+    fallback: 'light',
+    storageKey: 'color-theme'
+  },
+
 })

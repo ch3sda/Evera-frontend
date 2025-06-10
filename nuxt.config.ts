@@ -7,6 +7,7 @@ export default defineNuxtConfig({
       apiBase: 'http://localhost:8000', // Laravel
     }
   },
+  plugins: ['~/plugins/stripe.js'],
   vite: {
     optimizeDeps: {
       include: ['flowbite']

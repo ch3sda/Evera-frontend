@@ -2,10 +2,20 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  
   runtimeConfig: {
+    API_URL: 'http://127.0.0.1:8000', // Laravel
     public: {
-      apiBase: 'http://localhost:8000', // Laravel
+      API_URL: 'http://127.0.0.1:8000', // Laravel
     }
+  },
+  sanctum: {
+    baseUrl: 'http://127.0.0.1:8000', // Laravel backend URL
+    // Optional:
+    // csrfEndpoint: '/sanctum/csrf-cookie',
+    // loginEndpoint: '/api/login',
+    // userEndpoint: '/api/user',
+    // logoutEndpoint: '/api/logout'
   },
   plugins: ['~/plugins/stripe.js'],
   vite: {
@@ -28,7 +38,8 @@ export default defineNuxtConfig({
     '@formkit/auto-animate',
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
+    'nuxt-auth-sanctum',
   ],
   colorMode: {
     classSuffix: '',

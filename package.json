@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "nuxt": "latest",
+    "nuxt-auth-sanctum": "^0.6.7",
     "tailwindcss": "^4.1.8"
   }
 }

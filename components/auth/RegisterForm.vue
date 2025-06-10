@@ -72,7 +72,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router' // 👈 Import router
 import { useAuthStore } from '@/stores/auth'
+const router = useRouter()
 
 const auth = useAuthStore()
 
@@ -89,13 +91,12 @@ const handleRegister = async () => {
   try {
     await auth.register(form.value)
     // maybe redirect or notify
+    console.log('Registered successfully')
+router.push(`/auth/verify?email=${form.value.email}`)
+
   } catch (e) {
     console.error(e)
   }
 }
-
-await $fetch('http://localhost:8000/sanctum/csrf-cookie', {
-  credentials: 'include',
-});
 
 </script>

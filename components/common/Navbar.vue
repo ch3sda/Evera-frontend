@@ -129,12 +129,17 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { logoutUser } from '@/composables/useAuth'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
+const auth = useAuthStore()
 
 async function handleLogout() {
-  await logoutUser()
-  router.push('/login')  // Or your landing page
+  try {
+    await auth.logout()
+    router.push('/auth/login') // Redirect to login or landing
+  } catch (error) {
+    console.error('Logout failed:', error)
+  }
 }
 </script>

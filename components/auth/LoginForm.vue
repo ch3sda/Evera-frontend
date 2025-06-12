@@ -136,44 +136,30 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, watch } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useAuthStore } from '@/stores/auth' // Adjust path to your store
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
 
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
-
-const router = useRouter()
+const router = useRouter();
 const auth = useAuthStore()
-
-onMounted(() => {
-  const storedToken = localStorage.getItem('accessToken')
-  if (storedToken) {
-    auth.accessToken = storedToken
-    auth.fetchUser()
-  }
-})
-
-watch(() => auth.accessToken, (val) => {
-  if (val) {
-    localStorage.setItem('accessToken', val)
-  } else {
-    localStorage.removeItem('accessToken')
-  }
-})
-
-
 
 async function handleLogin() {
   try {
-    await auth.login({ email: email.value, password: password.value, remember: rememberMe.value })
+    await auth.login({
+      email: email.value,
+      password: password.value,
+      remember: rememberMe.value
+    })
     await auth.fetchUser()
+    // You can add router push or success message here
     router.push('/dashboard')
   } catch (error) {
-    alert('Login failed')
-    console.error(error)
+    console.error('Login failed:', error)
+    // You can add user-friendly error handling here
   }
 }
 </script>

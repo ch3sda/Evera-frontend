@@ -36,12 +36,10 @@ import { useAuthStore } from '@/stores/auth'
 const auth = useAuthStore()
 const user = computed(() => auth.user)
 
-onMounted(async () => {
-  if (!auth.user && localStorage.getItem('accessToken')) {
-    auth.accessToken = localStorage.getItem('accessToken')
-    await auth.fetchUser()
-  }
-})
+  onMounted(() => {
+    auth.loadFromStorage()
+  })
+
   console.log(auth.user)
   const chartSeries = [
     {

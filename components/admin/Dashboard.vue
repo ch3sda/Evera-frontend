@@ -42,6 +42,7 @@
             :series="chartSeries"
           />
         </div>
+        
       </div>
     </div>
   </template>
@@ -50,28 +51,19 @@
   const config = useRuntimeConfig()
   const baseUrl = config.public.API_URL
   import { useAuthStore } from '@/stores/auth'
-
-  import { onMounted } from 'vue'
   const auth = useAuthStore()
-
-  onMounted(async () => {
-    if (!auth.user && localStorage.getItem('accessToken')) {
-      auth.accessToken = localStorage.getItem('accessToken')
-      await auth.fetchUser()
-    }
-  })
-
+  const token = computed(() => auth.accessToken)
+  
 const stats = ref({
   total: 0,
   attendee: 0,
   organizer: 0,
   admin: 0,
 })
-const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken');
 
 const { data, error } = await useFetch(`${baseUrl}/api/admin/user-stats`, {
   headers: {
-    Authorization: `Bearer ${token}`
+    Authorization: `Bearer ${token.value}`
   },
 });
 

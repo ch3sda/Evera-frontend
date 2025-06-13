@@ -53,6 +53,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '~/stores/auth'
+import { inject } from 'vue'
+const toastRef = inject('toastRef')
+
 const config = useRuntimeConfig()
 
 const reason = ref('')
@@ -61,17 +64,13 @@ const loading = ref(false)
 
 // ✅ Correctly declare auth store
 const auth = useAuthStore()
+const token = computed(() => auth.accessToken)
 
 const submitRequest = async () => {
   if (!agreed.value) {
     return alert("You must agree to the terms.")
   }
-
-  const token = sessionStorage.getItem('accessToken') || localStorage.getItem('accessToken')
-  if (!token) {
-    return alert("You're not logged in.")
-  }
-
+ 
   // ✅ Use role from the auth store
   const role = auth.user?.role || null
   if (role !== 'attendee') {
@@ -84,18 +83,18 @@ const submitRequest = async () => {
     const { error } = await useFetch(`${config.public.API_URL}/api/attendee/request-organizer`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token.value}`,
       },
       body: { reason: reason.value },
     })
 
     if (error.value) {
-      alert(error.value.data?.message || 'Something went wrong.')
+      toastRef?.value?.showToast('warning', 'Please fill all the require field.')
     } else {
-      alert("Request submitted successfully!")
+      toastRef?.value?.showToast('success', `Application successfully Sent.`)
     }
   } catch (err) {
-    alert("Unexpected error occurred.")
+      toastRef?.value?.showToast('error', 'Failed to sent Application.')
   } finally {
     loading.value = false
   }

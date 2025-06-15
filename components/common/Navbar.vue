@@ -94,16 +94,19 @@
             </button>
             <ul id="dropdown-example" class="hidden py-2 space-y-2">
                   <li>
-                     <NuxtLink to="/management/approval" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-green-100 dark:text-white dark:hover:bg-green-700">Approval</NuxtLink>
-                  </li>
-                  <li>
-                     <NuxtLink to="/management/user" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-green-100 dark:text-white dark:hover:bg-green-700">User</NuxtLink>
-                  </li>
-                  <li>
                      <NuxtLink to="/management/event" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-green-100 dark:text-white dark:hover:bg-green-700">Event</NuxtLink>
                   </li>
                   <li>
+                     <NuxtLink to="/management/ticket" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-green-100 dark:text-white dark:hover:bg-green-700">Ticket</NuxtLink>
+                  </li>
+                  <li v-if="role === 'admin'">
                      <NuxtLink to="/management/category" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-green-100 dark:text-white dark:hover:bg-green-700">Category</NuxtLink>
+                  </li>
+                  <li v-if="role === 'admin'">
+                     <NuxtLink to="/management/approval" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-green-100 dark:text-white dark:hover:bg-green-700">Approval</NuxtLink>
+                  </li>
+                  <li v-if="role === 'admin'">
+                     <NuxtLink to="/management/user" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-green-100 dark:text-white dark:hover:bg-green-700">User</NuxtLink>
                   </li>
             </ul>
          </li>

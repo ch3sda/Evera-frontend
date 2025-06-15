@@ -1,6 +1,6 @@
 <template>
   <div class="h-full p-6">
-    <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Organizer Requests</h2>
+      <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">Organizer Approval</h1>
 
     <!-- Filters -->
 

@@ -5,10 +5,22 @@ export default defineNuxtRouteMiddleware((to, from) => {
     auth.loadFromStorage()
   }
 
-  const isPublicPage = ['/auth/login', '/auth/register', '/auth/verify', '/'].includes(to.path)
+  const isPublicPage = [
+    '/auth/login', 
+    '/auth/register', 
+    '/auth/verify', 
+    '/contact',
+    '/about',
+    '/service',
+    '/'].includes(to.path)
   const isDashboard = to.path.startsWith('/dashboard')
   const isManagement = to.path.startsWith('/management')
-
+  const isAdmin = [
+    '/management/category',
+    '/management/user', 
+    '/management/approval',
+    '/management/payment',
+  ].includes(to.path)
 
   // ✅ Redirect authenticated users away from auth pages
   if (auth.accessToken && isPublicPage) {
@@ -23,9 +35,14 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (auth.user?.role === 'attendee' && (isDashboard || isManagement)) {
     return navigateTo('/home')
   }
-    if (!auth.accessToken && !isPublicPage) {
+  if (!auth.accessToken && !isPublicPage) {
     return navigateTo('/auth/login')
   }
-
   // ✅ Let everything else through (guests, organizers, admins)
+
+  // ❌ Restrict only admin can access isAdmin Pages
+  if(auth.user?.role !== 'admin' && isAdmin){
+    return navigateTo('/dashboard')
+  }
+
 })

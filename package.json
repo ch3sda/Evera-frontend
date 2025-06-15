@@ -11,20 +11,28 @@
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
+    "@heroicons/vue": "^2.2.0",
     "@nuxt/image": "^1.10.0",
     "@nuxt/ui": "^3.0.2",
+    "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "^7.0.0-beta.0",
     "@pinia/nuxt": "^0.10.1",
+    "@stripe/stripe-js": "^7.3.1",
+    "axios": "^1.9.0",
     "flowbite": "^3.1.2",
     "nuxt": "^3.17.5",
-    "pinia": "^3.0.1",
+    "pinia": "^3.0.3",
+    "pinia-plugin-persistedstate": "^4.3.0",
     "typescript": "^5.8.2",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vue3-apexcharts": "^1.8.0"
   },
   "devDependencies": {
+    "@iconify-json/material-symbols": "^1.2.26",
+    "nuxt": "latest",
+    "nuxt-auth-sanctum": "^0.6.7",
     "tailwindcss": "^4.1.8"
   }
 }

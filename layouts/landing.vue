@@ -2,7 +2,10 @@
 <template>
   <div class=" dark:bg-gray-900 bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern.svg')] dark:bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern-dark.svg')]">
     <CommonGuestNavbar />
-    <slot />
+    <div class="h-full lg:py-8 py-14">
+     <slot />
+    </div>
+    <CommonFooterSection />
   </div>
 </template>
 <script setup>

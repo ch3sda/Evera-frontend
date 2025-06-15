@@ -36,6 +36,7 @@ const config: Config = {
     './app/spa-loading-template.html'
   ],
   plugins: []
+
 }
 
 export default config

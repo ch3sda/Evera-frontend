@@ -2,7 +2,7 @@ import { useUserStore } from '@/stores/user'
 
 export async function getCsrfToken() {
   const config = useRuntimeConfig()
-  await $fetch(`${config.public.apiBase}/sanctum/csrf-cookie`, {
+  await $fetch(`${config.public.API_URL}/sanctum/csrf-cookie`, {
     credentials: 'include',
   })
 }
@@ -11,7 +11,7 @@ export async function loginUser(email, password) {
   await getCsrfToken()
   const config = useRuntimeConfig()
 
-  const response = await $fetch(`${config.public.apiBase}/api/login`, {
+  const response = await $fetch(`${config.public.API_URL}/api/login`, {
     method: 'POST',
     body: { email, password },
     credentials: 'include',
@@ -29,7 +29,7 @@ export async function registerUser(name, email, password) {
   await getCsrfToken()
   const config = useRuntimeConfig()
 
-  const response = await $fetch(`${config.public.apiBase}/api/register`, {
+  const response = await $fetch(`${config.public.API_URL}/api/register`, {
     method: 'POST',
     credentials: 'include',
     body: {
@@ -56,7 +56,7 @@ export async function fetchUser() {
 
     if (token) {
       try {
-        const user = await $fetch(`${config.public.apiBase}/api/user`, {
+        const user = await $fetch(`${config.public.API_URL}/api/user`, {
           credentials: 'include',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -82,7 +82,7 @@ export async function logoutUser() {
   }
 
   try {
-    await $fetch(`${config.public.apiBase}/api/logout`, {
+    await $fetch(`${config.public.API_URL}/api/logout`, {
       method: 'POST',
       credentials: 'include',
       headers: {

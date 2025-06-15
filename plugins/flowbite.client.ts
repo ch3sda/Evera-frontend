@@ -1,8 +1,19 @@
-import 'flowbite/dist/flowbite.min.js';
+// plugins/flowbite.client.ts
+import 'flowbite/dist/flowbite.min.js'
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin((nuxtApp) => {
   if (process.client) {
+    console.log('✅ Flowbite JS loaded')
 
-    console.log('Flowbite is loaded');
+    nuxtApp.hook('page:finish', () => {
+      // This ensures components like dropdowns, modals, etc., are active
+      setTimeout(() => {
+        if (typeof window?.initFlowbite === 'function') {
+          window.initFlowbite() // If Flowbite exposes an init function
+        } else {
+          console.log('ℹ️ Flowbite components should be ready after page transition')
+        }
+      }, 50)
+    })
   }
-});
+})

@@ -2,26 +2,41 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  
   runtimeConfig: {
+    API_URL: 'http://localhost:8000', // Laravel
     public: {
-      apiBase: 'http://localhost:8000', // Laravel
+      API_URL: 'http://localhost:8000', // Laravel
     }
   },
+  plugins: ['~/plugins/stripe.js'],
   vite: {
     optimizeDeps: {
       include: ['flowbite']
     }
   },
   tailwindcss: {
-    configPath: 'tailwind.config.ts'
+    configPath: 'tailwind.config.ts',
+    cssPath: '~/assets/css/input.css',
+    exposeConfig: false,
+    config: {},
+    injectPosition: 0,
+    viewer: true,
   },
-  css: ['~/assets/css/input.css'], // you'll have to create this file
   modules: [
     '@pinia/nuxt',
-    '@nuxtjs/google-fonts',
     '@nuxt/ui',
     '@formkit/auto-animate',
     '@nuxtjs/tailwindcss',
-    '@nuxt/image'
-  ]
+    '@nuxt/image',
+    '@nuxtjs/color-mode',
+  ],
+  colorMode: {
+    classSuffix: '',
+    classPrefix: '',
+    preference: 'system',
+    fallback: 'light',
+    storageKey: 'color-theme'
+  },
+  
 })

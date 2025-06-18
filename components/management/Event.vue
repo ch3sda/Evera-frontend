@@ -198,10 +198,9 @@
               >Image</label
             >
             <input
-              type="file"
-              accept="image/*"
-              @change="e => form.image = e.target.files[0]"
-              class="w-full px-3 py-2 rounded border dark:bg-gray-600 dark:text-white"
+                type="file"
+                accept="image/*"
+                @change="e => form.image = e.target.files[0]"
             />
           </div>
 
@@ -398,7 +397,7 @@ const submitEvent = async () => {
     closeCreateModal()
     await fetchEvents()
   } catch (err) {
-    console.error(err)
+ 
     let msg = editMode.value ? 'Failed to update event' : 'Failed to create event'
     if (err?.data?.errors) {
       msg = Object.values(err.data.errors).flat().join(', ')

@@ -1,50 +1,70 @@
 <script setup>
-definePageMeta({
-  layout: 'landing',
-})
+import { ref, inject } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
-const email = useRoute().query.email || ''  // get email from query string
+const toastRef = inject('toastRef')
+const router = useRouter()
+const route = useRoute()
+const config = useRuntimeConfig()
+const baseUrl = config.public.API_URL
+
+const auth = useAuthStore()
+    definePageMeta({
+        layout: 'landing',
+    })
+// State
+const email = route.query.email || ''
 const otp = ref('')
 const verifying = ref(false)
 const error = ref('')
-const router = useRouter()
 
+// Verify OTP
 const verifyOtp = async () => {
   verifying.value = true
   error.value = ''
 
-  const { data, error: err } = await useFetch('/api/verify-otp', {
-    baseURL: 'http://localhost:8000', // update if needed
-    method: 'POST',
-    body: {
-      email,
-      otp_code: otp.value
-    }
-  })
+  try {
+    const { data, error: err } = await useFetch(`${baseUrl}/api/verify-otp`, {
+      method: 'POST',
+      body: {
+        email,
+        otp_code: otp.value,
+      },
+      headers: {
+        // optional: add auth if your endpoint needs it
+        // Authorization: `Bearer ${auth.accessToken}`,
+      },
+    })
 
-  verifying.value = false
+    if (err.value) throw new Error(err.value?.data?.message || 'Verification failed')
 
-  if (err.value) {
-    error.value = err.value.data.message || 'Verification failed'
-  } else {
-    router.push('/auth/login') // redirect after successful verification
+    toastRef?.value?.showToast('success', 'OTP Verified! Redirecting...')
+    router.push('/auth/login')
+  } catch (e) {
+    error.value = e.message
+    toastRef?.value?.showToast('error', e.message)
+  } finally {
+    verifying.value = false
   }
 }
 
+// Resend OTP
 const resendOtp = async () => {
-  const { data, error: err } = await useFetch('/api/resend-otp', {
-    baseURL: 'http://localhost:8000',
-    method: 'POST',
-    body: { email }
-  })
+  try {
+    const { error: err } = await useFetch(`${baseUrl}/api/resend-otp`, {
+      method: 'POST',
+      body: { email },
+    })
 
-  if (err.value) {
-    alert('Failed to resend OTP')
-  } else {
-    alert('OTP resent to your email')
+    if (err.value) throw new Error(err.value?.data?.message || 'Failed to resend OTP')
+    toastRef?.value?.showToast('success', 'OTP resent to your email')
+  } catch (e) {
+    toastRef?.value?.showToast('error', e.message)
   }
 }
 </script>
+
 <template>
   <div class="w-full h-screen flex items-center justify-center">
     <div class="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">

@@ -1,8 +1,6 @@
 <template>
   <div class="min-h-screen p-6">
     <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">Dashboard</h1>
-    <p v-if="user">Welcome back, {{ user.first_name }}!</p>
-    <pre>{{ user }}</pre>
 
     <div class="space-y-6">
       <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-6">

@@ -135,16 +135,23 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useAuthStore } from '@/stores/auth' // Adjust path to your store
+import { ref, inject } from 'vue'
+import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
+
+type ToastRef = {
+  showToast: (type: string, message: string) => void
+}
+
+const toastRef = inject<Ref<ToastRef> | null>('toastRef', null)
 
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
-const router = useRouter();
+
+const router = useRouter()
 const auth = useAuthStore()
 
 async function handleLogin() {
@@ -154,12 +161,16 @@ async function handleLogin() {
       password: password.value,
       remember: rememberMe.value
     })
+
     await auth.fetchUser()
-    // You can add router push or success message here
     router.push('/dashboard')
-  } catch (error) {
-    console.error('Login failed:', error)
-    // You can add user-friendly error handling here
+    toastRef?.value?.showToast('success', 'Login successful!')
+  } catch (err: any) {
+    console.error('Login error:', err)
+
+    // Always show generic error
+    toastRef?.value?.showToast('error', 'Email or password is not valid')
   }
 }
 </script>
+

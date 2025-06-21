@@ -57,7 +57,7 @@
       </div>
 
       <!-- Create Modal -->
-      <div v-if="showCreateModal" class="fixed inset-0 z-50 flex justify-center items-center overflow-auto bg-black bg-opacity-50" @click.self="closeCreateModal">
+      <div v-if="showCreateModal" class="fixed inset-0 z-50 flex justify-center items-center overflow-auto" @click.self="closeCreateModal">
         <div class="bg-white rounded-lg shadow p-6 max-w-md w-full dark:bg-gray-700">
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Create Event Category</h3>
@@ -78,7 +78,7 @@
       </div>
 
       <!-- Edit Modal -->
-      <div v-if="showEditModal" class="fixed inset-0 z-50 flex justify-center items-center overflow-auto bg-black bg-opacity-50" @click.self="closeEditModal">
+      <div v-if="showEditModal" class="fixed inset-0 z-50 flex justify-center items-center overflow-auto" @click.self="closeEditModal">
         <div class="bg-white rounded-lg shadow p-6 max-w-md w-full dark:bg-gray-700">
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Edit Event Category</h3>
@@ -99,7 +99,7 @@
       </div>
 
       <!-- Delete Modal -->
-      <div v-if="showDeleteModal" class="fixed inset-0 z-50 flex justify-center items-center overflow-auto bg-black bg-opacity-50" @click.self="closeDeleteModal" >
+      <div v-if="showDeleteModal" class="fixed inset-0 z-50 flex justify-center items-center overflow-auto" @click.self="closeDeleteModal" >
         <div class="bg-white rounded-lg shadow p-6 max-w-md w-full dark:bg-gray-700 text-center">
           <button @click="closeDeleteModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-900 dark:hover:text-white" aria-label="Close delete modal">
             ✕
@@ -138,6 +138,7 @@ const searchQuery = ref('')
 const newCategoryName = ref('')
 const editCategory = ref({ id: null, name: '' })
 const selectedCategoryId = ref(null)
+
 
 const showCreateModal = ref(false)
 const showEditModal = ref(false)
